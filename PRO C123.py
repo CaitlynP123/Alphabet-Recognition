@@ -18,7 +18,7 @@ print(pd.Series(y).value_counts())
 classes = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J','K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T','U', 'V', 'W', 'X', 'Y', 'Z']
 nclasses = len(classes)
 
-xTrain, xTest, yTrain, yTest = train_test_split(x, y, train_size=7500, test_size=2500, random_state=9) 
+xTrain, xTest, yTrain, yTest = train_test_split(x, y, train_size=3500, test_size=500, random_state=9) 
 
 xTrain_scaled = xTrain/255.0 
 xTest_scaled = xTest/255.0
@@ -47,7 +47,7 @@ while(True):
         im_pil = Image.fromarray(roi)
 
         image_bw = im_pil.convert('L') 
-        image_bw_resized = image_bw.resize((28,28), Image.ANTIALIAS) 
+        image_bw_resized = image_bw.resize((22,30), Image.ANTIALIAS) 
         image_bw_resized_inverted = PIL.ImageOps.invert(image_bw_resized) 
 
         pixelFilter = 20
@@ -58,7 +58,7 @@ while(True):
         maxPixel = np.max(image_bw_resized_inverted) 
         image_bw_resized_inverted_scaled = np.asarray(image_bw_resized_inverted_scaled)/maxPixel 
 
-        testSample = np.array(image_bw_resized_inverted_scaled).reshape(1,784) 
+        testSample = np.array(image_bw_resized_inverted_scaled).reshape(1,660) 
         testPred = clf.predict(testSample) 
 
         print("Predicted class is: ", testPred) 
